@@ -8,5 +8,7 @@ import { ContactComponent } from '../contact/contact.component';
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'menu', component: MenuComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, // default route
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' }, // if u enter an invalid route it will route to /home
 ];

@@ -12,3 +12,7 @@ export class DishService {
     return DISHES;
   }
 }
+
+// Decorators is a design pattern that is used to separate modification or decoration of a class without modifying
+// the original source code. In AngularJS, decorators are functions that allow a service, directive or filter to be
+// modified prior to its usage.

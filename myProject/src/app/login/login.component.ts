@@ -4,13 +4,17 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  user = { username: '', password: '', remember: false };
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<LoginComponent>) {}
 
-  ngOnInit(): void {
+  ngOnInit() {}
+
+  onSubmit() {
+    console.log('User: ', this.user);
+    this.dialogRef.close();
   }
-
 }

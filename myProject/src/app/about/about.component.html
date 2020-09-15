@@ -67,28 +67,30 @@
     </mat-card>
   </div>
 
-  <div fxFlex *ngIf="leader">
-    <h2>Corporate Leadership</h2>
-    <p>Display the details of the corporate leaders here</p>
-    <mat-list fxLayout="column" *ngFor="let leader of leaders">
-      <mat-list-item fxFlex>
-        <div>
-          <img
-            src="/assets/images/vijay.jpg"
-            mat-card-avatar
-            alt="{{ leader.name }}"
-          />
-        </div>
-        <div fxFlex="99" style="padding-left: 20px">
-          <p matLine>{{ leader.name }}</p>
-          <p matLine>{{ leader.designation }}</p>
-          <p matLine>{{ leader.description }}</p>
-        </div>
-      </mat-list-item>
-    </mat-list>
-  </div>
+  <div>
+    <div fxFlex *ngIf="leaders">
+      <h2>Corporate Leadership</h2>
+      <p>Display the details of the corporate leaders here</p>
+      <mat-list fxLayout="column" *ngFor="let leader of leaders">
+        <mat-list-item fxFlex>
+          <div>
+            <img
+              src="/assets/images/vijay.jpg"
+              mat-card-avatar
+              alt="{{ leader.name }}"
+            />
+          </div>
+          <div fxFlex="99" style="padding-left: 20px">
+            <p matLine>{{ leader.name }}</p>
+            <p matLine>{{ leader.designation }}</p>
+            <p matLine>{{ leader.description }}</p>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
 
-  <div [hidden]="leader">
-    <mat-spinner></mat-spinner>
+    <div [hidden]="leaders">
+      <mat-spinner></mat-spinner>
+    </div>
   </div>
 </div>

@@ -9,19 +9,10 @@ export class LeaderService {
   constructor() {}
 
   getLeaders(): Promise<Leader[]> {
-    return new Promise((resolve) => {
-      // Simulate a delay
-      setTimeout(() => resolve(LEADERS), 2000);
-    });
+    return Promise.resolve(LEADERS);
   }
 
   getFeaturedLeader(): Promise<Leader> {
-    return new Promise((resolve) => {
-      // Simulate a delay
-      setTimeout(
-        () => resolve(LEADERS.filter((leader) => leader.featured)[0]),
-        2000
-      );
-    });
+    return Promise.resolve(LEADERS.filter((leader) => leader.featured)[0]);
   }
 }

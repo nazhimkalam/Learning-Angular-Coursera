@@ -2,6 +2,7 @@ import { DishService } from './../services/dish.service';
 import { Dish } from './../shared/dish';
 import { Component, OnInit, Input } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { Location } from '@angular/common';
 
 @Component({
@@ -20,6 +21,9 @@ export class DishdetailComponent implements OnInit {
   // flowing out of the component as events.
 
   dish: Dish;
+  dishIds: string[];
+  prev: string;
+  next: string;
 
   constructor(
     private dishservice: DishService,
@@ -27,9 +31,32 @@ export class DishdetailComponent implements OnInit {
     private location: Location
   ) {}
 
-  ngOnInit():void {
-    const id:string = ''+this.route.snapshot.params['id'];
-    this.dishservice.getDish(id).subscribe(result => this.dish = result)
+  ngOnInit(): void {
+    this.dishservice
+      .getDishIds()
+      .subscribe((dishIds) => (this.dishIds = dishIds));
+    console.log(this.dishIds); // returns an array of the dish ids ["0", "1", "2", "3"]
+
+    this.route.params
+      .pipe(
+        switchMap((params: Params) => this.dishservice.getDish(params['id']))
+      )
+      .subscribe((dish) => {
+        this.dish = dish;
+        console.log(this.dish); // gives the data if the updated dish selected when ever the route changes
+        this.setPrevNext(dish.id);
+      });
+    
+  }
+
+  setPrevNext(dishId: string) {
+    const index = this.dishIds.indexOf(dishId);
+    this.prev = this.dishIds[
+      (this.dishIds.length + index - 1) % this.dishIds.length
+    ];
+    this.next = this.dishIds[
+      (this.dishIds.length + index + 1) % this.dishIds.length
+    ];
   }
 
   goBack(): void {

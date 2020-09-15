@@ -19,6 +19,6 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     // This is similar to a useEffect hook in react, the ngOnInit is a type of life cycle method in Angular
-    this.dishes = this.dishService.getDishes();
+    this.dishService.getDishes().then((result) => (this.dishes = result));
   }
 }

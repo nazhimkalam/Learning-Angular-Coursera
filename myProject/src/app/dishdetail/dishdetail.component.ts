@@ -104,6 +104,8 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.comment = this.commentForm.value;
     console.log(this.comment);
+    this.dish.comments.push(this.commentForm.value)
+    console.log(this.dish.comments)
     this.commentForm.reset({
       author: '',
       comment: '',

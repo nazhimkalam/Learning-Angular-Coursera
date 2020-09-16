@@ -51,7 +51,14 @@
       </mat-list>
     </div>
 
-    <p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p>
+    <p>
+      Author: {{ commentForm.value.author | json }} <br />
+      Rating: {{ commentForm.value.rating | json }} <br />
+      Comment: {{ commentForm.value.comment | json }} <br />
+
+      Status: {{ commentForm.status | json }} <br />
+    </p>
+    <br />
     <form
       novalidate
       [formGroup]="commentForm"

@@ -71,7 +71,7 @@
     <div fxFlex *ngIf="leaders">
       <h2>Corporate Leadership</h2>
       <p>Display the details of the corporate leaders here</p>
-      <mat-list fxLayout="column" *ngFor="let leader of leaders">
+      <mat-list fxLayout="column" *ngFor="let leader of leaders" [@expand]>
         <mat-list-item fxFlex>
           <div>
             <img

@@ -7,7 +7,7 @@
   fxLayoutGap="10px"
 >
   <div class="card">
-    <mat-card *ngIf="dish" fxFlex="100">
+    <mat-card *ngIf="dish" fxFlex="100" [@expand]>
       <mat-card-header>
         <mat-card-title>
           <h3>{{ dish.name | uppercase }}</h3>
@@ -34,7 +34,7 @@
   </div>
 
   <div class="card">
-    <mat-card *ngIf="promotion" fxFlex="100">
+    <mat-card *ngIf="promotion" fxFlex="100" [@expand]>
       <mat-card-header>
         <mat-card-title>
           <h3>{{ promotion.name | uppercase }}</h3>
@@ -59,7 +59,7 @@
   </div>
 
   <div class="card">
-    <mat-card *ngIf="leader" fxFlex="100">
+    <mat-card *ngIf="leader" fxFlex="100" [@expand]>
       <mat-card-header>
         <mat-card-title>
           <h3>{{ leader.name | uppercase }}</h3>

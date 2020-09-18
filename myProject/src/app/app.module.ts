@@ -38,6 +38,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { baseURL } from './shared/baseurl';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+
 
 @NgModule({
   declarations: [
@@ -78,6 +80,7 @@ import { baseURL } from './shared/baseurl';
   providers: [
     DishService,
     PromotionService,
+    ProcessHTTPMsgService,
     LeaderService,
     { provide: 'BaseURL', useValue: baseURL },
   ],

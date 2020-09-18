@@ -9,6 +9,7 @@ import { Dish } from '../shared/dish';
 })
 export class MenuComponent implements OnInit {
   dishes: Dish[];
+  errMess: string;
 
   constructor(
     private dishService: DishService,
@@ -17,6 +18,9 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     // This is similar to a useEffect hook in react, the ngOnInit is a type of life cycle method in Angular
-    this.dishService.getDishes().subscribe((result) => (this.dishes = result));
+    this.dishService.getDishes().subscribe(
+      (result) => (this.dishes = result),
+      (errMsg) => (this.errMess = <any>errMsg)  // if an error is returned we handle it like this
+    );
   }
 }

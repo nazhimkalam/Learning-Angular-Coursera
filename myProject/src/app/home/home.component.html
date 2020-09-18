@@ -6,25 +6,35 @@
   fxLayoutAlign.gt-md="space-around center"
   fxLayoutGap="10px"
 >
-  <div class = "card">
-    <mat-card *ngIf="dish" fxFlex = "100">
+  <div class="card">
+    <mat-card *ngIf="dish" fxFlex="100">
       <mat-card-header>
         <mat-card-title>
           <h3>{{ dish.name | uppercase }}</h3>
         </mat-card-title>
       </mat-card-header>
-      <img mat-card-image class="image__pizza" src="{{ baseURL + dish.image }}" alt="{{ dish.name }}" />
+      <img
+        mat-card-image
+        class="image__pizza"
+        src="{{ baseURL + dish.image }}"
+        alt="{{ dish.name }}"
+      />
       <mat-card-content>
         <p>{{ dish.description }}</p>
       </mat-card-content>
     </mat-card>
-    <div [hidden]="dish">
+    <div [hidden]="dish || dishErrMsg">
       <mat-spinner></mat-spinner>
+    </div>
+
+    <div fxFlex *ngIf="dishErrMsg">
+      <h2>Error</h2>
+      <h4>{{ dishErrMsg }}</h4>
     </div>
   </div>
 
-  <div class = "card">
-    <mat-card *ngIf="promotion" fxFlex = "100">
+  <div class="card">
+    <mat-card *ngIf="promotion" fxFlex="100">
       <mat-card-header>
         <mat-card-title>
           <h3>{{ promotion.name | uppercase }}</h3>
@@ -39,13 +49,17 @@
         <p>{{ promotion.description }}</p>
       </mat-card-content>
     </mat-card>
-    <div [hidden]="promotion">
+    <div [hidden]="promotion || promotionErrMsg">
       <mat-spinner></mat-spinner>
+    </div>
+    <div fxFlex *ngIf="promotionErrMsg">
+      <h2>Error</h2>
+      <h4>{{ promotionErrMsg }}</h4>
     </div>
   </div>
 
-  <div class = "card">
-    <mat-card *ngIf="leader" fxFlex = "100">
+  <div class="card">
+    <mat-card *ngIf="leader" fxFlex="100">
       <mat-card-header>
         <mat-card-title>
           <h3>{{ leader.name | uppercase }}</h3>
@@ -56,8 +70,12 @@
         <p>{{ leader.description }}</p>
       </mat-card-content>
     </mat-card>
-    <div [hidden]="leader">
+    <div [hidden]="leader || leaderErrMsg">
       <mat-spinner></mat-spinner>
+    </div>
+    <div fxFlex *ngIf="leaderErrMsg">
+      <h2>Error</h2>
+      <h4>{{ leaderErrMsg }}</h4>
     </div>
   </div>
 </div>

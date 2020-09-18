@@ -1,7 +1,7 @@
 import { Comment } from './../shared/comment';
 import { DishService } from './../services/dish.service';
 import { Dish } from './../shared/dish';
-import { Component, OnInit, Input,Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Inject, ViewChild } from '@angular/core';
 import { Params, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Location } from '@angular/common';
@@ -28,6 +28,7 @@ export class DishdetailComponent implements OnInit {
   dishIds: string[];
   prev: string;
   next: string;
+  errMess: string;
 
   formErrors = {
     author: '',
@@ -90,12 +91,11 @@ export class DishdetailComponent implements OnInit {
         const control = form.get(field);
         if (control && control.dirty && !control.valid) {
           const messages = this.validationMessages[field];
-          console.log(messages);   // error messages displayed
+          console.log(messages); // error messages displayed
 
           for (const key in control.errors) {
             if (control.errors.hasOwnProperty(key)) {
               this.formErrors[field] += messages[key] + ' ';
-
             }
           }
         }
@@ -105,8 +105,8 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.comment = this.commentForm.value;
     console.log(this.comment);
-    this.dish.comments.push(this.commentForm.value)
-    console.log(this.dish.comments)
+    this.dish.comments.push(this.commentForm.value);
+    console.log(this.dish.comments);
     this.commentForm.reset({
       author: '',
       comment: '',
@@ -129,7 +129,7 @@ export class DishdetailComponent implements OnInit {
       .subscribe((dish) => {
         this.dish = dish;
         console.log(this.dish); // gives the data if the updated dish selected when ever the route changes
-        this.setPrevNext(dish.id);
+        this.setPrevNext(dish.id), (errMsg) => (this.errMess = <any>errMsg);
       });
   }
 

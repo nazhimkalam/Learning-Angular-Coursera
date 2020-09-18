@@ -75,12 +75,12 @@
         <mat-list-item fxFlex>
           <div>
             <img
-              src="/assets/images/vijay.jpg"
+              src="{{ baseURL + leader.image }}"
               mat-card-avatar
               alt="{{ leader.name }}"
             />
           </div>
-          <div style="padding-left: 20px; width:90vw;">
+          <div style="padding-left: 20px; width: 90vw">
             <p matLine>{{ leader.name }}</p>
             <p matLine>{{ leader.designation }}</p>
             <p matLine>{{ leader.description }}</p>
@@ -89,8 +89,13 @@
       </mat-list>
     </div>
 
-    <div [hidden]="leaders">
+    <!-- wait till the leader or leaderErrMsg is not "null" -->
+    <div [hidden]="leaders || leaderErrMsg">
       <mat-spinner></mat-spinner>
+    </div>
+    <div fxFlex *ngIf="leaderErrMsg">
+      <h2>Error</h2>
+      <h4>{{ leaderErrMsg }}</h4>
     </div>
   </div>
 </div>

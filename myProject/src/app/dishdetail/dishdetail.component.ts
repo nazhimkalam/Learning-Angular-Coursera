@@ -29,6 +29,7 @@ export class DishdetailComponent implements OnInit {
   prev: string;
   next: string;
   errMess: string;
+  dishCopy: Dish;
 
   formErrors = {
     author: '',
@@ -105,7 +106,18 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.comment = this.commentForm.value;
     console.log(this.comment);
-    this.dish.comments.push(this.commentForm.value);
+    this.dishCopy.comments.push(this.commentForm.value);
+    this.dishservice.putDish(this.dishCopy).subscribe(
+      (dish) => {
+        this.dish = dish;
+        this.dishCopy = dish;
+      },
+      (errMsg) => {
+        this.dish = null;
+        this.dishCopy = null;
+        this.errMess = <any>errMsg;
+      }
+    );
     console.log(this.dish.comments);
     this.commentForm.reset({
       author: '',
@@ -126,11 +138,15 @@ export class DishdetailComponent implements OnInit {
       .pipe(
         switchMap((params: Params) => this.dishservice.getDish(params['id']))
       )
-      .subscribe((dish) => {
-        this.dish = dish;
-        console.log(this.dish); // gives the data if the updated dish selected when ever the route changes
-        this.setPrevNext(dish.id), (errMsg) => (this.errMess = <any>errMsg);
-      });
+      .subscribe(
+        (dish) => {
+          this.dish = dish;
+          this.dishCopy = dish;
+          console.log(this.dish); // gives the data of the updated dish selected when ever the route changes
+          this.setPrevNext(dish.id), (errMsg) => (this.errMess = <any>errMsg);
+        },
+        (errMsg) => (this.errMess = <any>errMsg)
+      );
   }
 
   formatLabel(value: number) {

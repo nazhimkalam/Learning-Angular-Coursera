@@ -40,24 +40,26 @@
   <!-- reactive form -->
   <div fxFlex fxLayout="column" fxFlexOffset="20px" class="form-size">
     <h3>Send us your Feedback</h3>
-    <div [hidden]="submissionDetailsDisplay">
-      <br />
-      <h3>Your Submission</h3>
-      <br />
-      <p>First Name: {{ feedback?.firstname }}</p>
-      <br />
-      <p>Last Name: {{ feedback?.lastname }}</p>
-      <br />
-      <p>Tel Number: {{ feedback?.telnum }}</p>
-      <br />
-      <p>Email: {{ feedback?.email }}</p>
-      <br />
-      <p>Contact You?: {{ feedback?.agree }}</p>
-      <br />
-      <p>How?: {{ feedback?.contacttype }}</p>
-      <br />
-      <p>Feedback: {{ feedback?.message }}</p>
-      <br />
+    <div [hidden]="submissionDetailsDisplay" *ngIf="feedback">
+      <div>
+        <br />
+        <h3>Your Submission</h3>
+        <br />
+        <p>First Name: {{ feedback?.firstname }}</p>
+        <br />
+        <p>Last Name: {{ feedback?.lastname }}</p>
+        <br />
+        <p>Tel Number: {{ feedback?.telnum }}</p>
+        <br />
+        <p>Email: {{ feedback?.email }}</p>
+        <br />
+        <p>Contact You?: {{ feedback?.agree }}</p>
+        <br />
+        <p>How?: {{ feedback?.contacttype }}</p>
+        <br />
+        <p>Feedback: {{ feedback?.message }}</p>
+        <br />
+      </div>
     </div>
     <!-- <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p> -->
 
@@ -69,7 +71,7 @@
       [hidden]="contactFormDisplay"
     >
       <p>
-        <mat-form-field class="half-width">
+        <mat-form-field class="half-width" [@expand]>
           <input
             matInput
             formControlName="firstname"
@@ -161,7 +163,7 @@
     </div>
 
     <!-- error -->
-    <div fxFlex *ngIf="errMess">
+    <div fxFlex *ngIf="errMess" [@expand]>
       <h2>Error</h2>
       <h4>{{ errMess }}</h4>
     </div>

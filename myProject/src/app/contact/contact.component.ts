@@ -22,6 +22,10 @@ export class ContactComponent implements OnInit {
   contactType = ContactType;
   errMess: any;
 
+  feedbackLoading: boolean = true;
+  contactFormDisplay: boolean = false;
+  submissionDetailsDisplay: boolean = true;
+
   formErrors = {
     firstname: '',
     lastname: '',
@@ -115,11 +119,24 @@ export class ContactComponent implements OnInit {
   onSubmit() {
     this.feedback = this.feedbackForm.value;
     console.log(this.feedback);
+
+    this.feedbackLoading = false;
+    this.contactFormDisplay = true;
+    this.submissionDetailsDisplay = true;
+
     this.feedbackService.submitFeedback(this.feedback).subscribe(
       (feedback) => {
         this.feedback = feedback;
         console.log('This is the returned data');
         console.log(this.feedback);
+
+        this.feedbackLoading = true;
+        this.submissionDetailsDisplay = false;
+
+        setTimeout(() => {
+          this.submissionDetailsDisplay = true;
+          this.contactFormDisplay = false;
+        }, 5000);
       },
       (errMsg) => {
         this.feedback = null;

@@ -38,15 +38,35 @@
   </div>
 
   <!-- reactive form -->
-  <div fxFlex fxFlexOffset="20px" class="form-size">
+  <div fxFlex fxLayout="column" fxFlexOffset="20px" class="form-size">
     <h3>Send us your Feedback</h3>
-    <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
+    <div [hidden]="submissionDetailsDisplay">
+      <br />
+      <h3>Your Submission</h3>
+      <br />
+      <p>First Name: {{ feedback?.firstname }}</p>
+      <br />
+      <p>Last Name: {{ feedback?.lastname }}</p>
+      <br />
+      <p>Tel Number: {{ feedback?.telnum }}</p>
+      <br />
+      <p>Email: {{ feedback?.email }}</p>
+      <br />
+      <p>Contact You?: {{ feedback?.agree }}</p>
+      <br />
+      <p>How?: {{ feedback?.contacttype }}</p>
+      <br />
+      <p>Feedback: {{ feedback?.message }}</p>
+      <br />
+    </div>
+    <!-- <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p> -->
 
     <form
       novalidate
       [formGroup]="feedbackForm"
       #fform="ngForm"
       (ngSubmit)="onSubmit()"
+      [hidden]="contactFormDisplay"
     >
       <p>
         <mat-form-field class="half-width">
@@ -134,6 +154,13 @@
       </button>
     </form>
 
+    <!-- loading spinner -->
+    <div [hidden]="feedbackLoading || errMess">
+      <h3>Submitting Form</h3>
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <!-- error -->
     <div fxFlex *ngIf="errMess">
       <h2>Error</h2>
       <h4>{{ errMess }}</h4>
